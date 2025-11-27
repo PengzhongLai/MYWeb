@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../css/product.css">
+    <link rel="stylesheet" type="text/css" href="../css/tabs.css">
+    <script src="../plugins/jquery-3.7.1.min.js"></script>
+    <script src="../js/tabs.js"></script>
+    <script src="../js/product.js"></script>
+    <title>摸鱼网 - 精选商品</title>
+</head>
+<body>
+<!-- 顶部导航栏 -->
+<header class="main-header">
+    <div class="logo-container">
+        <img src="../images/logo.png" alt="摸鱼网Logo" class="logo">
+        <h1 class="site-name">摸鱼网</h1>
+    </div>
+
+    <div class="tabs-container">
+        <button id="bt1" class="tab tab-active" onclick="showTab(event,'tab1','bt1')">首页</button>
+        <button id="bt2" class="tab" onclick="showTab(event,'tab2','bt2')">精选好品</button>
+        <button id="bt3" class="tab" onclick="showTab(event,'tab3','bt3')">个人中心</button>
+    </div>
+
+    <div class="user-menu">
+        <div class="user-avatar">
+            <img id="userLogo" src="" alt="用户头像" class="avatar-img">
+        </div>
+        <span id="userName" class="user-name"></span>
+    </div>
+</header>
+
+
+<!-- 主内容区 -->
+<main class="content-wrapper">
+    <!-- 首页内容 -->
+    <div id="tab1" class="tab-content active">
+        <div class="search-section">
+            <input class="product-search-input" type="text" id="search" placeholder="输入商品名称搜索...">
+            <button class="product-search-button" onclick="queryProduct()">
+                <i class="search-icon">搜索</i>
+            </button>
+        </div>
+
+        <div class="result-info">
+            <span id="msg">共查询到...</span>
+        </div>
+
+        <div id="productList" class="product-grid">
+            <!-- 商品卡片将通过JS动态生成 -->
+        </div>
+    </div>
+
+    <!-- 精选好品 -->
+    <div id="tab2" class="tab-content">
+        <div class="featured-header">
+            <h2>精选好品</h2>
+            <p>为您挑选的优质商品</p>
+        </div>
+        <div class="featured-grid" id="featuredList">
+            <!-- 精选商品将通过JS动态生成 -->
+        </div>
+    </div>
+
+    <!-- 个人中心 -->
+    <div id="tab3" class="tab-content">
+        <div class="profile-card">
+            <div class="profile-header">
+                <img id="detailImgSrc" alt="用户头像" class="profile-avatar">
+                <h2 id="detailName" class="profile-name"></h2>
+            </div>
+            <div class="profile-details">
+                <div class="detail-item">
+                    <span class="detail-label">账号：</span>
+                    <span id="detailLoginId" class="detail-value"></span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">密码：</span>
+                    <span id="detailPassword" class="detail-value"></span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">邮箱：</span>
+                    <span id="detailEmail" class="detail-value"></span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">电话：</span>
+                    <span id="detailPhone" class="detail-value"></span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">更新时间：</span>
+                    <span id="detailUpdateTime" class="detail-value"></span>
+                </div>
+                <div class="detail-item action-button">
+                    <button class="logout-btn" onclick="loginOut()">退出登录</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="main-footer">
+    <p>© 2025 摸鱼网 - 专注优质商品推荐</p>
+</footer>
+</body>
+</html>
