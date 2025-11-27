@@ -18,6 +18,7 @@
         <result column="updateTime" property="updateTime" />
         <result column="description" property="description" />
         <result column="imgSrc" property="imgSrc" />
+        <result column="good_comment_rate" property="goodCommentRate"/>
         <!--嵌套查询-->
        <!-- <association  column="id" property="evaluateList" select="queryEvaluateInfo"/>-->
         <collection column="id" property="evaluateList" javaType="ArrayList" select="queryEvaluateInfo"/>

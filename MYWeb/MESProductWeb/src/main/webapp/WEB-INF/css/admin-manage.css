@@ -1,0 +1,331 @@
+/* 操作栏样式 */
+.operation-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1.5rem 0;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.add-button {
+    padding: 0.8rem 1.5rem;
+    background-color: #22c55e;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+.add-button:hover {
+    background-color: #16a34a;
+}
+
+/* 表格样式 */
+.table-container {
+    overflow-x: auto;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.product-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 800px;
+}
+
+.product-table th, .product-table td {
+    padding: 0.8rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.product-table th {
+    background-color: #f8fafc;
+    font-weight: 600;
+    color: #64748b;
+}
+
+.product-table img {
+    width: 60px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+/* 操作按钮 */
+.operate-btn {
+    padding: 0.4rem 0.8rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 0.5rem;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+}
+
+.edit-btn {
+    background-color: #3b82f6;
+    color: white;
+}
+
+.edit-btn:hover {
+    background-color: #2563eb;
+}
+
+.delete-btn {
+    background-color: #ef4444;
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: #dc2626;
+}
+
+/* 模态框样式 */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.shelf-life-select {
+    width: 100%;
+    padding: 0.6rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    background-color: white;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background-color: white;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-content.small {
+    max-width: 300px;
+}
+
+.modal-header {
+    padding: 1rem;
+    border-bottom: 1px solid #f1f5f9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-body {
+    padding: 1rem;
+}
+
+.modal-footer {
+    padding: 1rem;
+    border-top: 1px solid #f1f5f9;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.modal-footer button {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.modal-footer button:hover {
+    background-color: #f1f5f9;
+}
+
+.danger-btn {
+    background-color: #ef4444;
+    color: white;
+    border-color: #ef4444;
+}
+
+.danger-btn:hover {
+    background-color: #dc2626;
+}
+
+.close-btn {
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #64748b;
+}
+
+/* 表单样式 */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #475569;
+}
+
+.form-group input, .form-group textarea, .form-group select {
+    width: 100%;
+    padding: 0.6rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.form-group textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+.hint {
+    color: #94a3b8;
+    font-size: 0.9rem;
+    margin-top: 0.3rem;
+}
+
+/* 操作栏：确保子元素水平排列，避免挤压 */
+.operation-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1.5rem 0;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+/* 搜索区域：flex水平排列，适配元素间距 */
+.search-section {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem; /* 元素间间距，避免挤压 */
+    flex-wrap: wrap; /* 适配小屏幕换行 */
+}
+
+/* 搜索选择框*/
+.product-search-select {
+    padding: 0.8rem 1.2rem;
+    padding-right: 2.5rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #334155;
+    background-color: #ffffff;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2364748b' viewBox='0 0 16 16'%3E%3Cpath d='M8 11.5l-6-6 1.5-1.5L8 8.5l4.5-4.5L14 5.5l-6 6z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 16px;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 120px;
+}
+
+.product-search-select:hover {
+    border-color: #94a3b8;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+}
+
+.product-search-select:focus {
+    outline: none;
+    border-color: #22c55e;
+    box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+}
+
+.product-search-select:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    background-color: #f8fafc;
+}
+
+.product-search-select option {
+    padding: 0.8rem 1rem;
+    color: #334155;
+    background-color: #ffffff;
+}
+
+.product-search-select option:checked {
+    background-color: #f0fdf4;
+    color: #16a34a;
+}
+
+.product-search-input {
+    padding: 0.8rem 1.2rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #334155;
+    transition: all 0.2s ease;
+    min-width: 150px; /* 避免输入框过窄 */
+}
+
+.product-search-input:focus {
+    outline: none;
+    border-color: #22c55e;
+    box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+}
+
+/* 搜索按钮 */
+.product-search-button {
+    padding: 0.8rem 1.5rem; /* 水平内边距足够，避免文字挤压 */
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #ffffff;
+    background-color: #22c55e;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    /* 核心修复：强制水平排列 + 文字居中 */
+    display: inline-flex; /* 行内flex，适配行内布局 */
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+    line-height: 1; /* 行高重置，避免文字偏移 */
+    white-space: nowrap; /* 禁止文字换行（关键！） */
+    min-width: 80px; /* 最小宽度，确保“搜索”二字水平显示 */
+}
+
+/* 新增商品按钮 */
+.product-search-button:hover {
+    background-color: #16a34a;
+}
+
+.add-button {
+    padding: 0.8rem 1.5rem;
+    background-color: #22c55e;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.add-button:hover {
+    background-color: #16a34a;
+}

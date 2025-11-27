@@ -2,7 +2,7 @@
 $("document").ready(function (){
   if(localStorage.length>0){//如果浏览器缓存中有参数
    const user=JSON.parse(localStorage.getItem('user'));
-   console.log(user);
+   // console.log(user);
    //个人中心信息展示
    personInfo(user);
    //查询商品列表数据
@@ -44,7 +44,7 @@ function queryProduct(){
         data:{name:name},//接口参数
         url:'http://localhost:8089/product/query-product-info',//后端接口地址
         success:function (res){//接口成功返回
-            console.log(res);
+            // console.log(res);
             document.getElementById("msg").innerHTML=res.msg;
             var productDiv=document.getElementById("productList");
             productDiv.innerHTML='';
@@ -93,7 +93,7 @@ function loadFeaturedProducts() {
         type: 'GET',
         url: 'http://localhost:8089/product/query-featured-products',  // 调用新增接口
         success: function (res) {
-            console.log("精选商品：", res);
+            // console.log("精选商品：", res.data);
             var featuredDiv = document.getElementById("featuredList");
             featuredDiv.innerHTML = '';
             var html = '';
@@ -107,7 +107,7 @@ function loadFeaturedProducts() {
                         '           <h3>'+json.name+'</h3>\n' +
                         '           <p>'+json.description+'</p>\n' +
                         '           <p class="price">价格：￥'+json.price+'</p>\n' +
-                        // '           <p style="color: #22c55e; padding: 0 0.8rem;">好评率：'+json.goodCommentRate+'%</p>\n' +  // 显示好评率
+                        '           <p style="color: #22c55e; padding: 0 0.8rem;">好评率：'+json.goodCommentRate+'%</p>\n' +  // 显示好评率
                         '           <div style="display: flex">\n' +
                         '               <p><a class="evaluate">'+json.evaluateList.length+'</a>条评价</p>\n' +
                         '               <button class="gwc-button">+添加到购物车</button>\n' +

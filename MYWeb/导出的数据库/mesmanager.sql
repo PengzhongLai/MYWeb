@@ -11,7 +11,7 @@
  Target Server Version : 80043 (8.0.43)
  File Encoding         : 65001
 
- Date: 27/11/2025 09:19:01
+ Date: 27/11/2025 10:58:05
 */
 
 SET NAMES utf8mb4;
@@ -90,7 +90,7 @@ CREATE TABLE `tb_product_comment_stats`  (
 -- Records of tb_product_comment_stats
 -- ----------------------------
 INSERT INTO `tb_product_comment_stats` VALUES (1, 1, 5, 0, 5, 100.00, '2025-11-27 08:58:56');
-INSERT INTO `tb_product_comment_stats` VALUES (2, 2, 0, 0, 0, 0.00, '2025-11-27 08:53:36');
+INSERT INTO `tb_product_comment_stats` VALUES (2, 2, 30, 2, 32, 93.75, '2025-11-27 10:15:31');
 INSERT INTO `tb_product_comment_stats` VALUES (3, 3, 0, 0, 0, 0.00, '2025-11-27 08:53:36');
 INSERT INTO `tb_product_comment_stats` VALUES (4, 4, 0, 0, 0, 0.00, '2025-11-27 08:53:36');
 INSERT INTO `tb_product_comment_stats` VALUES (5, 5, 0, 0, 0, 0.00, '2025-11-27 08:53:36');
@@ -129,6 +129,22 @@ INSERT INTO `tb_product_info` VALUES (5, '云南过桥米钱', '云南过桥米�
 INSERT INTO `tb_product_info` VALUES (6, '鸿星尔克防滑鞋', '特步男鞋夏季2024新款', '../images/productImg/HXEK.png', '福建泉州', '红星公司', '泉州', 653.00, '2025-06', NULL, NULL, NULL, 0, NULL);
 
 -- ----------------------------
+-- Table structure for tb_sys_admin
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_sys_admin`;
+CREATE TABLE `tb_sys_admin`  (
+  `loginId` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '管理员登录账号（主键）',
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '登录密码（建议加密存储）',
+  `createTime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '账号创建时间（自动填充）',
+  PRIMARY KEY (`loginId`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '网站后台管理员账号密码表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tb_sys_admin
+-- ----------------------------
+INSERT INTO `tb_sys_admin` VALUES ('Lairoot', 'Lairoot', '2025-11-27 10:24:09');
+
+-- ----------------------------
 -- Table structure for tb_sys_user
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_sys_user`;
@@ -161,7 +177,7 @@ CREATE TABLE `tb_sys_user_staff`  (
 -- ----------------------------
 -- Records of tb_sys_user_staff
 -- ----------------------------
-INSERT INTO `tb_sys_user_staff` VALUES ('123456', '张三', '../images/userImg/x001.png', '1780000000', '11116789@qq.com', '2024-05-10 15:14:13');
+INSERT INTO `tb_sys_user_staff` VALUES ('123456', 'Lai', '../images/userImg/x001.png', '1780000000', '11116789@qq.com', '2024-05-10 15:14:13');
 
 -- ----------------------------
 -- Triggers structure for table tb_product_comment_stats

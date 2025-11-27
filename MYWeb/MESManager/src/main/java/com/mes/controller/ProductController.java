@@ -49,6 +49,10 @@ public class ProductController {
     public ResponseEntity<?> queryFeaturedProducts() {
         JSONObject json = new JSONObject();
         List<Product> list = this.productService.queryFeaturedProducts();
+        // 新增日志：打印每个商品的ID和好评率
+        for (Product p : list) {
+            System.out.println("商品ID：" + p.getId() + "，好评率：" + p.getGoodCommentRate());
+        }
         if (list != null) {
             json.put("data", list);
             json.put("msg", "共查询到" + list.size() + "条精选商品");
