@@ -18,16 +18,18 @@ function loginOut() {
 // 查询商品列表
 function queryProducts() {
     // 收集搜索条件
-    const params = {
-        name: $("#searchName").val().trim(),
-        placeSale: $("#searchPlace").val().trim(),
-        publishState: $("#searchState").val()
-    };
+    const params = {};
+    const name = $("#searchName").val().trim();
+    const placeSale = $("#searchPlace").val().trim();
+    const publishState = $("#searchState").val();
 
+    if (name) params.name = name;         // 仅当name非空时传递
+    if (placeSale) params.placeSale = placeSale; // 仅当placeSale非空时传递
+    if (publishState) params.publishState = publishState;
     $.ajax({
         type: "GET",
         url: "http://localhost:8089/product/query-product-info",
-        data: params,
+        data: params, // 传递过滤后的参数
         dataType: "json",
         success: function(res) {
             if (res.data && res.data.length > 0) {

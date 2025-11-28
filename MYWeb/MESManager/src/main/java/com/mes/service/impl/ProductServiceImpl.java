@@ -9,7 +9,9 @@ import com.mes.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -45,5 +47,48 @@ public class ProductServiceImpl implements ProductService {
             e.printStackTrace();
         }
         return list;
+    }
+
+    @Override
+    public int updateProduct(Product product) {
+        try {
+            // 设置更新时间为当前时间
+            product.setUpdateTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+            return productMapper.updateProduct(product);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    @Override
+    public int deleteProductById(int id) {
+        try {
+            return productMapper.deleteProductById(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    //
+    @Override
+    public int addProduct(Product product) {
+        try {
+            // 设置默认时间
+            String now = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+            product.setAddTime(now);
+            product.setUpdateTime(now);
+            // 未发布状态默认0
+            if (product.getPublishState() == 0) {
+                product.setPublishTime(null);
+            } else {
+                product.setPublishTime(now); // 已发布则设置发布时间
+            }
+            return productMapper.addProduct(product);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
     }
 }

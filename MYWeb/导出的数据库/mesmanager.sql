@@ -11,7 +11,7 @@
  Target Server Version : 80043 (8.0.43)
  File Encoding         : 65001
 
- Date: 27/11/2025 10:58:05
+ Date: 28/11/2025 08:30:52
 */
 
 SET NAMES utf8mb4;
@@ -125,8 +125,8 @@ INSERT INTO `tb_product_info` VALUES (1, '奶油面包', '真的超赞得一款�
 INSERT INTO `tb_product_info` VALUES (2, 'AD钙奶', 'ad高钙奶,买东西上摸鱼网', '../images/productImg/AD.png', '浙江杭州', '杭州娃哈哈集团有限公司', '杭州', 36.00, '2024-11', 34, '2024-04-23 18:12:23', '2024-04-23 13:17:42', 1, '2024-04-22 18:58:53');
 INSERT INTO `tb_product_info` VALUES (3, '美的空调', '这个夏天你值得拥有', '../images/productImg/MD.png', '广东广州', '美的集团', '广州', 1240.00, '2027-12', 45, '2024-03-22 18:58:22', '2024-04-04 16:58:42', 0, '2024-04-22 18:58:53');
 INSERT INTO `tb_product_info` VALUES (4, '脱骨李子', '好吃不贵，酸酸甜甜脱骨李子', '../images/productImg/TGLZ.png', '四川成都', '四川鲜果公司', '成都', 32.00, '2025-06', 1000, '2024-05-17 17:04:18', '2024-05-17 17:04:22', 0, '2024-05-17 17:04:26');
-INSERT INTO `tb_product_info` VALUES (5, '云南过桥米钱', '云南过桥米线大桶装速食', '../images/productImg/YNMY.png', '云南昆明', '米线公司', '昆明', 13.00, '2025-06', NULL, NULL, NULL, 0, NULL);
-INSERT INTO `tb_product_info` VALUES (6, '鸿星尔克防滑鞋', '特步男鞋夏季2024新款', '../images/productImg/HXEK.png', '福建泉州', '红星公司', '泉州', 653.00, '2025-06', NULL, NULL, NULL, 0, NULL);
+INSERT INTO `tb_product_info` VALUES (5, '云南过桥米钱', '云南过桥米线大桶装速食', '../images/productImg/YNMY.png', '云南昆明', '米线公司', '昆明', 13.00, '2025-06', 20, NULL, NULL, 0, NULL);
+INSERT INTO `tb_product_info` VALUES (6, '鸿星尔克防滑鞋', '特步男鞋夏季2024新款', '../images/productImg/HXEK.png', '福建泉州', '红星公司', '泉州', 653.00, '2025-06', 10, NULL, NULL, 0, NULL);
 
 -- ----------------------------
 -- Table structure for tb_sys_admin

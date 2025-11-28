@@ -14,4 +14,10 @@ public interface ProductService {
 
     List<Product> queryFeaturedProducts();
 
+    int updateProduct(Product product);
+
+    int deleteProductById(int id);
+
+    int addProduct(Product product);
+
 }

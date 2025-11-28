@@ -23,23 +23,59 @@
        <!-- <association  column="id" property="evaluateList" select="queryEvaluateInfo"/>-->
         <collection column="id" property="evaluateList" javaType="ArrayList" select="queryEvaluateInfo"/>
     </resultMap>
-    <select id="queryProductInfo" resultType="hashmap" resultMap="product">
-        SELECT * FROM tb_product_info
-        where  1=1
-          <if test="name!=null">
-              and name like CONCAT('%',#{name},'%')
-          </if>
-         <if test="publishState!=null">
-             and publishState=#{publishState}
-         </if>
-        <if test="placeSale!=null">
-            and  placeSale in
-            <foreach item="item" index="index" collection="placeSaleList" open="(" separator="," close=")">
-                #{item}
-            </foreach>
 
-        </if>
+    <select id="queryProductInfo" parameterType="hashmap" resultType="com.mes.domain.Product">
+        SELECT * FROM tb_product_info
+        <where>
+            <!-- 支持按名称模糊查询 -->
+            <if test="name != null and name != ''">
+                AND name LIKE CONCAT('%', #{name}, '%')
+            </if>
+            <!-- 支持按销售地查询 -->
+            <if test="placeSale != null and placeSale != ''">
+                AND placeSale IN (#{placeSale})
+            </if>
+            <!-- 支持按发布状态查询 -->
+            <if test="publishState != null">
+                AND publishState = #{publishState}
+            </if>
+        </where>
     </select>
+
+    <update id="updateProduct" parameterType="com.mes.domain.Product">
+        UPDATE tb_product_info
+        <set>
+            <if test="name != null">name = #{name},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="imgSrc != null">imgSrc = #{imgSrc},</if>
+            <if test="source != null">source = #{source},</if>
+            <if test="manufacturer != null">manufacturer = #{manufacturer},</if>
+            <if test="placeSale != null">placeSale = #{placeSale},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="shelfLife != null">shelfLife = #{shelfLife},</if>
+            <if test="quantityNum != null">quantityNum = #{quantityNum},</if>
+            <if test="publishState != null">publishState = #{publishState},</if>
+            <if test="publishTime != null">publishTime = #{publishTime},</if>
+            updateTime = #{updateTime}
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteProductById" parameterType="int">
+        DELETE FROM tb_product_info WHERE id = #{id}
+    </delete>
+
+    <insert id="addProduct" parameterType="com.mes.domain.Product" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO tb_product_info (
+            name, description, imgSrc, source, manufacturer,
+            placeSale, price, shelfLife, quantityNum, addTime,
+            publishTime, publishState, updateTime
+        ) VALUES (
+                     #{name}, #{description}, #{imgSrc}, #{source}, #{manufacturer},
+                     #{placeSale}, #{price}, #{shelfLife}, #{quantityNum}, #{addTime},
+                     #{publishTime}, #{publishState}, #{updateTime}
+                 )
+    </insert>
 
     <!--结果映射集-->
     <resultMap id="PETInfo" type="com.mes.domain.ProductEvaluateInfo">

@@ -12,4 +12,10 @@ public interface ProductMapper {
     List<Product> queryProductInfo(HashMap params);
 
     List<Product> queryFeaturedProducts();
+
+    int updateProduct(Product product);
+
+    int deleteProductById(int id);
+
+    int addProduct(Product product);
 }

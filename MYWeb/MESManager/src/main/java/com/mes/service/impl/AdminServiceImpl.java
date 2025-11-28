@@ -40,8 +40,24 @@ public class AdminServiceImpl implements AdminService {
         }
     }
 
+//    @Override
+//    public Admin queryAdminInfo(HashMap<String, String> params) {
+//        try {
+//            return adminMapper.queryAdminInfo(params);
+//        } catch (Exception e) {
+//            System.err.println("==查询管理员信息异常：==");
+//            e.printStackTrace();
+//            return null;
+//        }
+//    }
+
     @Override
     public Admin queryAdminInfo(HashMap<String, String> params) {
+        // 补充参数校验
+        if (params == null || params.get("loginId") == null || params.get("password") == null) {
+            System.out.println("==查询参数不完整==");
+            return null;
+        }
         try {
             return adminMapper.queryAdminInfo(params);
         } catch (Exception e) {
