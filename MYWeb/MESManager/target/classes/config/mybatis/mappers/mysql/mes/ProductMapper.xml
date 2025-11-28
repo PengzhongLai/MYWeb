@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mes.mapper.ProductMapper">
+    <!--结果映射集-->
+    <resultMap id="product" type="com.mes.domain.Product">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="source" property="source" />
+        <result column="manufacturer" property="manufacturer" />
+        <result column="placeSale" property="placeSale" />
+        <result column="price" property="price" />
+        <result column="shelfLife" property="shelfLife" />
+        <result column="quantityNum" property="quantityNum" />
+        <result column="addTime" property="addTime" />
+        <result column="publishTime" property="publishTime" />
+        <result column="publishState" property="publishState" />
+        <result column="updateTime" property="updateTime" />
+        <result column="description" property="description" />
+        <result column="imgSrc" property="imgSrc" />
+        <result column="good_comment_rate" property="goodCommentRate"/>
+        <!--嵌套查询-->
+       <!-- <association  column="id" property="evaluateList" select="queryEvaluateInfo"/>-->
+        <collection column="id" property="evaluateList" javaType="ArrayList" select="queryEvaluateInfo"/>
+    </resultMap>
+    <select id="queryProductInfo" resultType="hashmap" resultMap="product">
+        SELECT * FROM tb_product_info
+        where  1=1
+          <if test="name!=null">
+              and name like CONCAT('%',#{name},'%')
+          </if>
+         <if test="publishState!=null">
+             and publishState=#{publishState}
+         </if>
+        <if test="placeSale!=null">
+            and  placeSale in
+            <foreach item="item" index="index" collection="placeSaleList" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+
+        </if>
+    </select>
+
+    <!--结果映射集-->
+    <resultMap id="PETInfo" type="com.mes.domain.ProductEvaluateInfo">
+        <id column="id" property="id" />
+        <result column="mainId" property="mainId" />
+        <result column="userId" property="userId" />
+        <result column="evaluateInfo" property="evaluateInfo" />
+        <result column="evaluateTime" property="evaluateTime" />
+    </resultMap>
+    <!--查询评价信息数据-->
+    <select id="queryEvaluateInfo" parameterType="java.util.ArrayList" resultMap="PETInfo">
+        SELECT  * FROM tb_pdt_evaluate_info
+        WHERE mainId =#{id}
+        ORDER BY evaluateTime desc
+    </select>
+
+    <!-- 查询好评率≥90的精选商品 -->
+    <select id="queryFeaturedProducts" resultMap="product">
+        SELECT
+            p.*,
+            s.good_comment_rate
+        FROM
+            tb_product_info p
+                INNER JOIN
+            tb_product_comment_stats s
+            ON
+                p.id = s.product_id
+        WHERE
+            s.good_comment_rate >= 90  -- 筛选好评率≥90的商品
+          AND p.publishState = 1  -- 只显示已发布商品
+        ORDER BY
+            s.good_comment_rate DESC  -- 按好评率降序排列
+    </select>
+</mapper>

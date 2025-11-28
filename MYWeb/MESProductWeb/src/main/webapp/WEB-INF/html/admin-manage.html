@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../css/product.css"> <!-- 复用基础样式 -->
+    <link rel="stylesheet" type="text/css" href="../css/admin-manage.css"> <!-- 管理页专属样式 -->
+    <script src="../plugins/jquery-3.7.1.min.js"></script>
+    <script src="../js/admin-manage.js"></script>
+    <title>商品管理中心</title>
+</head>
+<body>
+<!-- 顶部导航栏 -->
+<header class="main-header">
+    <div class="logo-container">
+        <img src="../images/logo.png" alt="摸鱼网Logo" class="logo">
+        <h1 class="site-name">商品管理中心</h1>
+    </div>
+
+    <div class="tabs-container">
+        <button id="bt1" class="tab tab-active" onclick="showTab(event,'tab1','bt1')">商品管理</button>
+        <button id="logoutBtn" class="tab" onclick="loginOut()">退出登录</button>
+    </div>
+</header>
+
+
+<!-- 主内容区 -->
+<main class="content-wrapper">
+    <!-- 商品管理内容 -->
+    <div id="tab1" class="tab-content active">
+        <!-- 操作区：搜索 + 新增按钮 -->
+        <div class="operation-bar">
+            <div class="search-section">
+                <input class="product-search-input" type="text" id="searchName" placeholder="输入商品名称">
+                <input class="product-search-input" type="text" id="searchPlace" placeholder="输入销售地">
+                <select class="product-search-select" id="searchState">
+                    <option value="">全部状态</option>
+                    <option value="1">已发布</option>
+                    <option value="0">未发布</option>
+                </select>
+                <button class="product-search-button" onclick="queryProducts()">搜索</button>
+            </div>
+            <button class="add-button" onclick="showAddModal()">+ 新增商品</button>
+        </div>
+
+        <!-- 商品列表表格 -->
+        <div class="table-container">
+            <table class="product-table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>商品名称</th>
+                    <th>描述</th>
+                    <th>图片</th>
+                    <th>价格(￥)</th>
+                    <th>销售地</th>
+                    <th>发布状态</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody id="productTableBody">
+                <!-- 商品数据将通过JS动态生成 -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+
+<!-- 编辑商品模态框 -->
+<div id="editModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>编辑商品</h3>
+            <span class="close-btn" onclick="closeEditModal()">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form id="editForm">
+                <input type="hidden" id="editId"> <!-- 隐藏的商品ID -->
+                <div class="form-group">
+                    <label>商品名称：</label>
+                    <input type="text" id="editName" required>
+                </div>
+                <div class="form-group">
+                    <label>描述：</label>
+                    <textarea id="editDescription" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>来源：</label>
+                    <input type="text" id="editSource">
+                </div>
+                <div class="form-group">
+                    <label>厂家：</label>
+                    <input type="text" id="editManufacturer">
+                </div>
+                <div class="form-group">
+                    <label>销售地：</label>
+                    <input type="text" id="editPlaceSale">
+                </div>
+                <div class="form-group">
+                    <label>价格：</label>
+                    <input type="number" step="0.01" id="editPrice" required>
+                </div>
+                <div class="form-group">
+                    <label>保质期：</label>
+                    <select id="editShelfLife" class="shelf-life-select">
+                        <option value="">请选择保质期</option>
+                        <option value="1个月">1个月</option>
+                        <option value="3个月">3个月</option>
+                        <option value="6个月">6个月</option>
+                        <option value="1年">1年</option>
+                        <option value="2年">2年</option>
+                        <option value="长期">长期</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>库存数量：</label>
+                    <input type="number" id="editQuantityNum">
+                </div>
+                <div class="form-group">
+                    <label>发布状态：</label>
+                    <select id="editPublishState">
+                        <option value="1">已发布</option>
+                        <option value="0">未发布</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>当前图片：</label><br>
+                    <img id="editCurrentImg" src="" alt="商品图片" style="width:100px;">
+                </div>
+                <div class="form-group">
+                    <label>更换图片：</label>
+                    <input type="file" id="editImgFile" accept="image/*">
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button onclick="closeEditModal()">取消</button>
+            <button onclick="submitEdit()">确认修改</button>
+        </div>
+    </div>
+</div>
+
+<!-- 删除确认模态框 -->
+<div id="deleteModal" class="modal">
+    <div class="modal-content small">
+        <div class="modal-header">
+            <h3>确认删除</h3>
+            <span class="close-btn" onclick="closeDeleteModal()">&times;</span>
+        </div>
+        <div class="modal-body">
+            <p>确定要删除该商品吗？删除后不可恢复</p>
+            <input type="hidden" id="deleteId">
+        </div>
+        <div class="modal-footer">
+            <button onclick="closeDeleteModal()">取消</button>
+            <button class="danger-btn" onclick="submitDelete()">确认删除</button>
+        </div>
+    </div>
+</div>
+
+<!-- 新增商品模态框 -->
+<div id="addModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>新增商品</h3>
+            <span class="close-btn" onclick="checkAddCancel()">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form id="addForm">
+                <div class="form-group">
+                    <label>商品名称：</label>
+                    <input type="text" id="addName" required>
+                </div>
+                <div class="form-group">
+                    <label>描述：</label>
+                    <textarea id="addDescription" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>来源：</label>
+                    <input type="text" id="addSource">
+                </div>
+                <div class="form-group">
+                    <label>厂家：</label>
+                    <input type="text" id="addManufacturer">
+                </div>
+                <div class="form-group">
+                    <label>销售地：</label>
+                    <input type="text" id="addPlaceSale">
+                </div>
+                <div class="form-group">
+                    <label>价格：</label>
+                    <input type="number" step="0.01" id="addPrice" required>
+                </div>
+                <div class="form-group">
+                    <label>保质期：</label>
+                    <select id="addShelfLife" class="shelf-life-select">
+                        <option value="">请选择保质期</option>
+                        <option value="1个月">1个月</option>
+                        <option value="3个月">3个月</option>
+                        <option value="6个月">6个月</option>
+                        <option value="1年">1年</option>
+                        <option value="2年">2年</option>
+                        <option value="长期">长期</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>库存数量：</label>
+                    <input type="number" id="addQuantityNum">
+                </div>
+                <div class="form-group">
+                    <label>发布状态：</label>
+                    <select id="addPublishState">
+                        <option value="1">已发布</option>
+                        <option value="0">未发布</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>商品图片：</label>
+                    <input type="file" id="addImgFile" accept="image/*">
+                    <p class="hint">未上传时使用默认图片</p>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button onclick="checkAddCancel()">取消</button>
+            <button onclick="submitAdd()">确认新增</button>
+        </div>
+    </div>
+</div>
+
+<footer class="main-footer">
+    <p>© 2025 商品管理中心</p>
+</footer>
+</body>
+</html>

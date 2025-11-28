@@ -1,0 +1,36 @@
+.tabs {
+    display: flex;
+    justify-content: space-around;
+}
+
+.tab {
+    /* 使用 rgba 设置背景颜色，其中 a 代表透明度 (0 到 1 之间) */
+    background-color: rgb(30 134 138 / 90%); /* 红色，半透明（50%透明度） */
+    color: white; /* 文本颜色 */
+    border: none; /* 移除边框 */
+    padding: 15px 32px; /* 内边距 */
+    text-align: center; /* 文本居中对齐 */
+    text-decoration: none; /* 移除下划线 */
+    display: inline-block; /* 显示为行内块级元素 */
+    font-size: 25px; /* 字体大小 */
+    margin: 4px 2px; /* 外边距 */
+    cursor: pointer; /* 鼠标悬停时变为手形 */
+    transition: background-color 0.3s ease; /* 平滑过渡效果 */
+}
+.tab-font-color {
+    color: blue; /* 文本颜色 */
+    background-color: rgb(30 134 138 / 100%);
+}
+.tab:hover {
+    background-color: #ddd;
+}
+
+.tab-content {
+    display: none;
+    padding: 20px 0;
+    border: 1px solid #ccc;
+}
+
+.tab-content.active {
+    display: block;
+}

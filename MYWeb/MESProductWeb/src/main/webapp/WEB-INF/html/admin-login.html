@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../css/login.css"> <!-- 复用登录页样式 -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script src="../js/admin-login.js"></script> <!-- 新增管理员登录逻辑JS -->
+    <title>后台管理系统</title>
+</head>
+<body>
+<div class="background-container"></div>
+
+<div class="login-box">
+    <h2>后台管理系统</h2> <!-- 标题修改为后台系统名称 -->
+
+    <!-- 仅保留登录表单，移除注册表单 -->
+    <div class="form-container login active">
+        <form id="adminLoginForm">
+            <div class="input-group">
+                <label for="adminLoginId">管理员账号</label>
+                <input type="text" id="adminLoginId" placeholder="请输入管理员账号" required>
+                <span class="error-message" id="adminLoginIdError"></span>
+            </div>
+            <div class="input-group">
+                <label for="adminPassword">密码</label>
+                <input type="password" id="adminPassword" placeholder="请输入密码" required>
+                <span class="error-message" id="adminPasswordError"></span>
+            </div>
+            <div class="button-group">
+                <button type="button" onclick="adminLogin()">登录</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

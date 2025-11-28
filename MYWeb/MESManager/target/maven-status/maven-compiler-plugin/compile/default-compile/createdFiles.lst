@@ -1,0 +1,16 @@
+com\mes\service\ProductService.class
+com\mes\controller\FileController.class
+com\mes\service\FileService.class
+com\mes\controller\ProductController.class
+com\mes\service\impl\UserServiceImpl.class
+com\mes\domain\ProductEvaluateInfo.class
+com\mes\service\impl\FileServiceImpl.class
+com\mes\util\QrcodeGenerator.class
+com\mes\domain\User.class
+com\mes\service\impl\ProductServiceImpl.class
+com\mes\mapper\ProductMapper.class
+com\mes\service\UserService.class
+com\mes\Application.class
+com\mes\domain\Product.class
+com\mes\mapper\UserMapper.class
+com\mes\controller\UserController.class

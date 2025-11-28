@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../css/login.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script src="../js/login.js"></script>
+    <title>摸鱼网 - 登录</title>
+</head>
+<!-- 使用渐变背景替代图片，加载更快且不会变形 -->
+<body>
+<!-- 背景容器 -->
+<div class="background-container"></div>
+
+<!-- 登录框主体 -->
+<div class="login-box">
+    <h2>摸鱼网</h2>
+
+    <!-- 默认显示登录表单 -->
+    <div class="form-container login active">
+        <form id="loginForm">
+            <div class="input-group">
+                <label for="loginId">账号</label>
+                <input type="text" id="loginId" placeholder="请输入账号" required>
+                <span class="error-message" id="loginIdError"></span>
+            </div>
+            <div class="input-group">
+                <label for="password">密码</label>
+                <input type="password" id="password" placeholder="请输入密码" required>
+                <span class="error-message" id="passwordError"></span>
+            </div>
+            <div class="button-group">
+                <button type="button" onclick="login()">登录</button>
+            </div>
+            <div class="toggle-link">
+                还没有账号？<a href="javascript:toggle()">立即注册</a>
+            </div>
+        </form>
+    </div>
+
+    <!-- 注册表单默认隐藏 -->
+    <div class="form-container register">
+        <form id="registerForm">
+            <div class="input-group">
+                <label for="registerLoginId">账号</label>
+                <input type="text" id="registerLoginId" placeholder="请输入账号" required>
+                <span class="error-message" id="registerLoginIdError"></span>
+            </div>
+            <div class="input-group">
+                <label for="registerName">用户名</label>
+                <input type="text" id="registerName" placeholder="请输入用户名" required>
+                <span class="error-message" id="registerNameError"></span>
+            </div>
+            <div class="input-group">
+                <label for="registerPassword">密码</label>
+                <input type="password" id="registerPassword" placeholder="请输入密码" required>
+                <span class="error-message" id="registerPasswordError"></span>
+            </div>
+            <div class="input-group">
+                <label for="registerEmail">邮箱</label>
+                <input type="email" id="registerEmail" placeholder="请输入邮箱" required>
+                <span class="error-message" id="registerEmailError"></span>
+            </div>
+            <div class="input-group">
+                <label for="registerPhone">电话</label>
+                <input type="tel" id="registerPhone" placeholder="请输入电话" required>
+                <span class="error-message" id="registerPhoneError"></span>
+            </div>
+            <div class="button-group">
+                <button type="button" onclick="register()">注册</button>
+                <button type="button" class="cancel-btn" onclick="toggle()">取消</button>
+            </div>
+            <div class="toggle-link">
+                已有账号？<a href="javascript:toggle()">返回登录</a>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
