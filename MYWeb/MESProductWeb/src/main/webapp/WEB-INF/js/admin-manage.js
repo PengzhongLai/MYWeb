@@ -50,7 +50,7 @@ function renderProductTable(products) {
     products.forEach(product => {
         html += `
         <tr>
-            <td>${product.id}</td>
+            <td>${product.rowNum}</td> <!-- 用rowNum作为连续序号 -->
             <td>${product.name}</td>
             <td>${product.description || '-'}</td>
             <td><img src="${product.imgSrc}" alt="${product.name}"></td>
@@ -58,7 +58,7 @@ function renderProductTable(products) {
             <td>${product.placeSale || '-'}</td>
             <td>${product.publishState === 1 ? '<span style="color:green">已发布</span>' : '<span style="color:gray">未发布</span>'}</td>
             <td>
-                <button class="operate-btn edit-btn" onclick="showEditModal(${product.id})">编辑</button>
+                <button class="operate-btn edit-btn" onclick="showEditModal(${product.id})">编辑</button> <!-- 编辑/删除仍用id（唯一标识） -->
                 <button class="operate-btn delete-btn" onclick="showDeleteModal(${product.id})">删除</button>
             </td>
         </tr>`;

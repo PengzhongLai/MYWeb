@@ -2,6 +2,7 @@ package com.mes.mapper;
 
 import com.mes.domain.Product;
 import com.mes.domain.User;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.HashMap;
 import java.util.List;
@@ -18,4 +19,6 @@ public interface ProductMapper {
     int deleteProductById(int id);
 
     int addProduct(Product product);
+
+    int initCommentStats(@Param("productId") int productId);
 }

@@ -19,13 +19,17 @@
         <result column="description" property="description" />
         <result column="imgSrc" property="imgSrc" />
         <result column="good_comment_rate" property="goodCommentRate"/>
+        <result column="row_num" property="rowNum" />
         <!--嵌套查询-->
        <!-- <association  column="id" property="evaluateList" select="queryEvaluateInfo"/>-->
         <collection column="id" property="evaluateList" javaType="ArrayList" select="queryEvaluateInfo"/>
     </resultMap>
 
     <select id="queryProductInfo" parameterType="hashmap" resultType="com.mes.domain.Product">
-        SELECT * FROM tb_product_info
+        SELECT
+        *,
+        ROW_NUMBER() OVER (ORDER BY id) AS row_num  -- 动态生成连续序号
+        FROM tb_product_info
         <where>
             <!-- 支持按名称模糊查询 -->
             <if test="name != null and name != ''">
@@ -65,16 +69,18 @@
         DELETE FROM tb_product_info WHERE id = #{id}
     </delete>
 
-    <insert id="addProduct" parameterType="com.mes.domain.Product" useGeneratedKeys="true" keyProperty="id">
+    <insert id="addProduct" parameterType="com.mes.domain.Product"
+            useGeneratedKeys="true" keyProperty="id">
+        <!-- 原插入tb_product_info的SQL -->
         INSERT INTO tb_product_info (
-            name, description, imgSrc, source, manufacturer,
-            placeSale, price, shelfLife, quantityNum, addTime,
-            publishTime, publishState, updateTime
+        name, description, imgSrc, source, manufacturer,
+        placeSale, price, shelfLife, quantityNum, addTime,
+        publishTime, publishState, updateTime
         ) VALUES (
-                     #{name}, #{description}, #{imgSrc}, #{source}, #{manufacturer},
-                     #{placeSale}, #{price}, #{shelfLife}, #{quantityNum}, #{addTime},
-                     #{publishTime}, #{publishState}, #{updateTime}
-                 )
+        #{name}, #{description}, #{imgSrc}, #{source}, #{manufacturer},
+        #{placeSale}, #{price}, #{shelfLife}, #{quantityNum}, #{addTime},
+        #{publishTime}, #{publishState}, #{updateTime}
+        )
     </insert>
 
     <!--结果映射集-->
@@ -109,4 +115,23 @@
         ORDER BY
             s.good_comment_rate DESC  -- 按好评率降序排列
     </select>
+
+    <!-- 初始化商品评价统计记录 -->
+    <insert id="initCommentStats" parameterType="int">
+        INSERT INTO tb_product_comment_stats (
+            product_id,
+            good_comment_count,
+            bad_comment_count,
+            total_comment_count,
+            good_comment_rate,
+            update_time
+        ) VALUES (
+                     #{productId},
+                     0,  -- 初始好评数为0
+                     0,  -- 初始差评数为0
+                     0,  -- 初始总评价数为0
+                     0.00,  -- 初始好评率为0
+                     NOW()  -- 更新时间为当前时间
+                 )
+    </insert>
 </mapper>

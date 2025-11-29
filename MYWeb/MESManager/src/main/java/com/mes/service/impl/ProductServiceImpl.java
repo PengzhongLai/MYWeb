@@ -85,10 +85,28 @@ public class ProductServiceImpl implements ProductService {
             } else {
                 product.setPublishTime(now); // 已发布则设置发布时间
             }
-            return productMapper.addProduct(product);
+
+            // 1. 新增商品到tb_product_info
+            int rows = productMapper.addProduct(product);
+
+            // 2. 若新增成功，获取自动生成的商品ID，初始化评价统计记录
+            if (rows > 0) {
+                // 注意：需确保ProductMapper的addProduct方法配置了useGeneratedKeys获取自增ID
+                int newProductId = product.getId();
+                productMapper.initCommentStats(newProductId);
+            }
+
+            return rows;
         } catch (Exception e) {
             e.printStackTrace();
             return 0;
         }
     }
+
+    @Override
+    public int initCommentStats(int productId) {
+        return productMapper.initCommentStats(productId);
+    }
+
+
 }

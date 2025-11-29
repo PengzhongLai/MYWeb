@@ -35,6 +35,16 @@ public class Product {
     // 好评率（从tb_product_comment_stats表获取）
     private double goodCommentRate;
 
+    private int rowNum;
+
+    public int getRowNum() {
+        return rowNum;
+    }
+
+    public void setRowNum(int rowNum) {
+        this.rowNum = rowNum;
+    }
+
     public double getGoodCommentRate() {
         return goodCommentRate;
     }

@@ -131,7 +131,7 @@ public class ProductController {
         try {
             // 处理图片（默认图或上传图）
             if ("true".equals(useDefaultImg)) {
-                product.setImgSrc("../images/productImg/default.png"); // 默认图片路径
+                product.setImgSrc("../images/SpMRimg/MrIMG.gif"); // 默认图片路径
             } else if (imgFile != null && !imgFile.isEmpty()) {
                 JSONObject uploadResult = fileService.fileUpload(
                         new ArrayList<>(Collections.singletonList(imgFile)), request);
